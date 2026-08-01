@@ -16,6 +16,24 @@ const sidebar       = document.getElementById("sidebar");
 const overlay       = document.getElementById("overlay");
 const menuBtn       = document.getElementById("menuBtn");
 const sidebarToggle = document.getElementById("sidebarToggle");
+const themeBtn      = document.getElementById("themeBtn");
+
+/* ── Theme (dark mode) ────────────────────────────────────── */
+const root = document.documentElement;
+
+function applyTheme(dark) {
+  root.setAttribute("data-theme", dark ? "dark" : "light");
+  localStorage.setItem("theme", dark ? "dark" : "light");
+}
+
+// Load saved preference, fall back to OS preference
+const savedTheme = localStorage.getItem("theme");
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+applyTheme(savedTheme ? savedTheme === "dark" : prefersDark);
+
+themeBtn.addEventListener("click", () => {
+  applyTheme(root.getAttribute("data-theme") !== "dark");
+});
 
 /* ── State ────────────────────────────────────────────────── */
 let currentFilter = "all";
