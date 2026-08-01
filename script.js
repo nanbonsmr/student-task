@@ -26,11 +26,8 @@ function applyTheme(dark) {
   localStorage.setItem("theme", dark ? "dark" : "light");
 }
 
-// Load saved preference, fall back to OS preference
-const savedTheme = localStorage.getItem("theme");
-const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-applyTheme(savedTheme ? savedTheme === "dark" : prefersDark);
-
+// Theme is already applied by the inline script in <head>.
+// This just wires up the toggle button.
 themeBtn.addEventListener("click", () => {
   applyTheme(root.getAttribute("data-theme") !== "dark");
 });
